@@ -3,3 +3,5 @@
 export(get_scatter_themes)
 export(matrix_to_tbl_df)
 export(tbl_df_to_matrix)
+import(dplyr)
+import(ggplot2)

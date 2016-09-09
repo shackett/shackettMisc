@@ -4,9 +4,10 @@ Version: 0.0.0.9000
 Authors@R: person("Sean", "Hackett", email = "shackett@princeton.edu", role = c("aut", "cre"))
 Description: Assorted functions for plotting (ggplot2 themes) and data
     manipulation.
+Imports:
+    dplyr (>= 0.5.0)
 Suggests:
     ggplot2 (>= 2.1.0),
-    dplyr (>= 0.5.0),
     tidyr (>= 0.6.0),
     testthat
 Depends:

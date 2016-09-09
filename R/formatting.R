@@ -6,16 +6,16 @@
 #' @param value_name column of \code{a_table} representing values of the matrix
 #' @return a matrix
 #' @seealso \code{\link{matrix_to_tbl_df}}
-#' @examples input_data <- data_frame(row = rep(letters[1:3], each = 3), col = rep(LETTERS[1:3], times = 3), val = 1:9, extra_field = 2:10)
+#' @import dplyr
+#' @examples input_data <- dplyr::data_frame(row = rep(letters[1:3], each = 3), col = rep(LETTERS[1:3], times = 3), val = 1:9, extra_field = 2:10)
 #' tbl_df_to_matrix(input_data, "row", "col", "val")
 #' @export
 tbl_df_to_matrix <- function(a_table, row_name, col_name, value_name){
 
-  requireNamespace("dplyr")
-  requireNamespace("tidyr")
+  requireNamespace("tidyr", quietly = T)
 
   spread_table <- a_table %>% select_(.dots = c(row_name, col_name, value_name)) %>%
-    spread_(col_name, value_name)
+    tidyr::spread_(col_name, value_name)
   rownames(spread_table) <- spread_table %>% select_(row_name) %>% unlist()
   spread_table %>%
     select_(.dots = as.list(setdiff(colnames(spread_table), row_name))) %>%
@@ -31,6 +31,7 @@ tbl_df_to_matrix <- function(a_table, row_name, col_name, value_name){
 #' @param col_name name of output column where values from \code{a_matrix} will be stored
 #' @return a tbl_df object with columns matching the row names, column names and values of \code{a_matrix}
 #' @seealso \code{\link{tbl_df_to_matrix}}
+#' @import dplyr
 #' @examples input_matrix <- matrix(1:9, ncol = 3)
 #' rownames(input_matrix) <- letters[1:3]
 #' colnames(input_matrix) <- LETTERS[1:3]
@@ -38,11 +39,10 @@ tbl_df_to_matrix <- function(a_table, row_name, col_name, value_name){
 #' @export
 matrix_to_tbl_df <- function(a_matrix, row_name, col_name, value_name){
 
-  requireNamespace("dplyr")
-  requireNamespace("tidyr")
+  requireNamespace("tidyr", quietly = T)
 
-  a_matrix %>% as.data.frame %>% mutate(row = rownames(.)) %>%
-    gather("col", "value", -row) %>%
+  a_matrix %>% as.data.frame %>% dplyr::mutate(row = rownames(.)) %>%
+    tidyr::gather("col", "value", -row) %>%
     rename_(.dots = setNames(list("row", "col", "value"), c(row_name, col_name, value_name))) %>%
     tbl_df
 
