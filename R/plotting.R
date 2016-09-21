@@ -1,7 +1,9 @@
 #' Generate a list with custom themes for scatter (y ~ x) plots
 #'
 #' @return A list containing ggplot2 themes
+#'
 #' @import ggplot2
+#'
 #' @export
 get_scatter_themes <- function(){
 

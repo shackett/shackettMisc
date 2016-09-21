@@ -3,5 +3,6 @@
 export(get_scatter_themes)
 export(matrix_to_tbl_df)
 export(tbl_df_to_matrix)
-import(dplyr)
+export(tbl_df_to_matrix_)
 import(ggplot2)
+importFrom(dplyr,"%>%")

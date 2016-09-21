@@ -22,10 +22,12 @@ a tbl_df object with columns matching the row names, column names and values of 
 Reformat a matrix int oa tbl_df table
 }
 \examples{
+
 input_matrix <- matrix(1:9, ncol = 3)
 rownames(input_matrix) <- letters[1:3]
 colnames(input_matrix) <- LETTERS[1:3]
 matrix_to_tbl_df(input_matrix, "row", "col", "val")
+
 }
 \seealso{
 \code{\link{tbl_df_to_matrix}}
